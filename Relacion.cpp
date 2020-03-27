@@ -74,10 +74,10 @@ class Relacion{
       ofstream Escribir;
       Escribir.open("./"+ruta+"txt",std::ios::app);
       for (int i = 0; i <tuplas.size(); ++i){
-          Escribir<<tuplas[i]->getId()<<",";
+          Escribir<<tuplas[i]->getId()<<","
+          <<tuplas[i]->getAtributos().at(i)<<",";
       }
-
-      Escribir<<";"<<endl;
+      Escribir<<endl;
       Escribir.close();
     }//fin del metodo para escribir el 
     ~Relacion(){

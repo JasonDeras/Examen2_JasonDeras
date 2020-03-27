@@ -14,7 +14,7 @@ Tupla* tupla=new Tupla();
 
 //Vector para contorlar las relaciones
 vector<Relacion*>relaciones;
-vector<string> auxiliares;
+vector<string> comas;
 
 string token(string cadena, string divisor,int pos){
                
@@ -56,7 +56,7 @@ void leer_Sencilla(){
          		cout<<"Nombre: "<<token(linea,";",1);
          		relaciones.push_back(new Relacion(token(linea,";",1)));
             	cout<<"\nEncabezados: "<<token(linea,";",2);
-            	auxiliares.push_back(token(linea,";",2));
+            	comas.push_back(token(linea,";",2));
             	cont++;
             	cout<<endl<<endl;
         	} 
@@ -132,12 +132,15 @@ int main(){
 			break;}
 
 			case 3:{
-				
-				int comas;
 
-				string aux;
+				string atributo;
+				int cant_comas=0;
+
+				string coma;
 				int pos;
-				int id=1000+rand()%(10000-1);;
+
+				int id=1000+rand()%(10000-1);
+
 				cout<<"Realciones"<<endl<<endl;
 				leer_Sencilla();
 
@@ -149,18 +152,24 @@ int main(){
 					cin>>pos;
 				}//fin del while de las posiciones
 				tupla=new Tupla(id);
-				relaciones[pos]->setTupla(tupla);
-				aux=auxiliares[pos];
-				cout<<aux;
 
-				for(int i=0;i<aux.size();++i){
-					if(aux[i]==','){
-						con++;
+				coma=comas[pos];
+
+				for(int i=0;i<coma.size();++i){
+					if(coma[i]==','){
+						cant_comas++;
 					}
 				}//fin del for de los atributos
 
-				//relacion->setTupla(tupla);
-				//relacion->Relacion_tupla(relaciones[pos]->getNombre());
+				while(cant_comas>0){
+					cout<<"Ingrese un atributo de a tupla: ";
+					cin>>atributo;
+					tupla->setAtributo(atributo);
+					cant_comas--;
+				}//fin del while de los atributos para la coma
+				relaciones[pos]->setTupla(tupla);
+				relaciones[pos]->Relacion_tupla(relaciones[pos]->getNombre());
+
 			break;}
 
 			case 4:
