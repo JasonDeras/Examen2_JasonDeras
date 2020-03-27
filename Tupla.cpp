@@ -10,8 +10,8 @@ using namespace std;
 class Tupla{
       
       private:
-              int id;
-			  vector<string>atributos;                        
+        int id;
+		vector<string>atributos;                        
       public:
 
             Tupla(){
@@ -45,13 +45,15 @@ class Tupla{
             void print(){
 
                 cout<<"La Tupla "<<endl 
-                "id:"<<id<<endl;
+                <<"id:"<<id<<endl;
 
-                cout<<"Hobbies"<<endl;
+                cout<<"Atributos"<<endl;
                 for(int i=0;i<atributos.size();i++){
-                  	atributos.at(i)->print();
+                  	cout<<atributos.at(i);
 				}//fin del for de impresion de los atributos
-             }
+                cout<<endl<<endl;
+
+             }//fin del print
 			 
 			~Tupla(){
 
