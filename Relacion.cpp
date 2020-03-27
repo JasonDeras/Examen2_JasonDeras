@@ -64,7 +64,7 @@ class Relacion{
       for (int i = 0; i < encabezados.size(); ++i){
           Escribir<<encabezados[i]<<",";
       }
-
+      Escribir<<";"<<endl;
       Escribir.close();
 
     }//fin del metodo para guardar relaciones con sus encabezados
@@ -74,8 +74,8 @@ class Relacion{
       ofstream Escribir;
       Escribir.open("./"+ruta+"txt",std::ios::app);
       for (int i = 0; i <tuplas.size(); ++i){
-          Escribir<<tuplas.at(i)->getId()<<",";
-          //Escribir<<tuplas.at(i)->getAtributos()<<",";
+          Escribir<<tuplas.at(i)->getId()<<","
+          <<tuplas.at(i)->getAtributos().at(i)<<",";
       }
 
       Escribir<<";"<<endl;

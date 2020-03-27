@@ -45,14 +45,16 @@ void leer_Sencilla(){
     string linea;              
     Leer.open("./relaciones.txt"); 
     int cont=0;
-    
+
     if (Leer.is_open()){
     	while(! Leer.eof()){
     		getline(Leer,linea);             
         	if(linea.size()>0){//Atoi es de string a id o de cualquier otro numero  
+         		cout<<"Posicion: "<<cont<<endl;
          		cout<<"Nombre: "<<token(linea,";",1);
          		relaciones.push_back(new Relacion(token(linea,";",1)));
             	cout<<"\nEncabezados: "<<token(linea,";",2);
+            	cont++;
             	cout<<endl<<endl;
         	} 
         }
@@ -123,16 +125,21 @@ int main(){
 
 			case 2:{
 				cout<<"Realciones"<<endl<<endl;
-				leer_Sencilla();
-				//relacion->getNombre();	
+				leer_Sencilla();	
 			break;}
 
 			case 3:{
+				int pos;
+				cout<<"Realciones"<<endl<<endl;
 				leer_Sencilla();
-				cout<<"Relacionse creadas"<<endl;
-				for (int i = 0; i < relaciones.size(); ++i){
-					relaciones.at(i)->getNombre();
-				}
+
+				cout<<"Ingrese la poscion en la que inserta la tupla: ";
+				cint>>pos;
+
+				while(pos<0|| pos>relaciones.size()){
+
+				}//fin del whiel de las posiciones
+
 			break;}
 
 			case 4:
