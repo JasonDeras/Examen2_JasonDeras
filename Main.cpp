@@ -14,6 +14,7 @@ Tupla* tupla=new Tupla();
 
 //Vector para contorlar las relaciones
 vector<Relacion*>relaciones;
+vector<string> auxiliares;
 
 string token(string cadena, string divisor,int pos){
                
@@ -55,6 +56,7 @@ void leer_Sencilla(){
          		cout<<"Nombre: "<<token(linea,";",1);
          		relaciones.push_back(new Relacion(token(linea,";",1)));
             	cout<<"\nEncabezados: "<<token(linea,";",2);
+            	auxiliares.push_back(token(linea,";",2));
             	cont++;
             	cout<<endl<<endl;
         	} 
@@ -131,6 +133,9 @@ int main(){
 
 			case 3:{
 				
+				int comas;
+
+				string aux;
 				int pos;
 				int id=1000+rand()%(10000-1);;
 				cout<<"Realciones"<<endl<<endl;
@@ -144,8 +149,17 @@ int main(){
 					cin>>pos;
 				}//fin del while de las posiciones
 				tupla=new Tupla(id);
+				relaciones[pos]->setTupla(tupla);
+				aux=auxiliares[pos];
+				cout<<aux;
 
-				relacion->setTupla(tupla);
+				for(int i=0;i<aux.size();++i){
+					if(aux[i]==','){
+						con++;
+					}
+				}//fin del for de los atributos
+
+				//relacion->setTupla(tupla);
 				//relacion->Relacion_tupla(relaciones[pos]->getNombre());
 			break;}
 

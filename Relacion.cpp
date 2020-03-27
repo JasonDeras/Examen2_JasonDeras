@@ -49,7 +49,7 @@ class Relacion{
     }//set de los tuplas
              
     void setTupla(Tupla*tupla){
-      this->tuplas.push_back(tupla);
+      tuplas.push_back(tupla);
     }//set de una sola tupla
              
     vector<Tupla*> getTuplas(){
