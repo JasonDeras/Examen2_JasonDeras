@@ -1,3 +1,148 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <bits/stdc++.h>
+#include "Relacion.cpp"
+#include "Tupla.cpp"
+
+using namespace std;
+
+//Variables de control
+Relacion* relacion;
+Tupla* tupla;
+
+string token(string cadena, string divisor,int pos){
+               
+      if(cadena.size()>0){
+                 
+        char oracion[cadena.size()]; 
+                 
+        for (int i=0;i<=cadena.size();i++){
+          oracion[i]=cadena[i];
+        }//fin del for 
+        char *ptrtoken; 
+        int num=1;
+        const char* d=divisor.c_str();
+        ptrtoken = strtok(oracion , d);
+        while(ptrtoken){
+          if(num==pos){ 
+            return ptrtoken;
+          }//fin del if                  
+          ptrtoken = strtok(NULL, d);
+          num++;
+        }//fin del while
+        return "";
+      }else{
+        return "";
+      }
+    }
+    
+void leer_Sencilla(){
+      fstream Leer;
+      string linea;              
+      Leer.open("./relaciones.txt"); 
+      int cont=0;
+      if (Leer.is_open()){                 
+        
+        while(! Leer.eof()){
+          getline(Leer,linea);             
+          if(linea.size()>0){//Atoi es de string a id o de cualquier otro numero  
+            cout<<"Nombre: "<<token(linea,";",1);
+            cout<<"\nEncabezados: "<<token(linea,";",2);
+            cout<<endl<<endl;
+          } 
+        }
+
+      }     
+      Leer.close();
+    }
+
+
+
+
+int menu(){
+		
+	int opcion;
+
+	cout<<"Menu\n\n";
+	cout<<"1. Crear Relacion"<<endl;
+	cout<<"2. Ver Relaciones"<<endl;
+	cout<<"3. Insertar Tupla"<<endl;
+	cout<<"4. Salir"<<endl;
+	cout<<"Ingrese una opcion: ";
+	cin>>opcion;
+	cout<<endl<<endl;
+	return opcion;
+
+}//fin del metodo del menu
+
+void Crear_Relacion(){
+	
+	vector<string>encabezados;                        
+    string nombre;
+    int cantidad_encabezados;
+    string encabezado;
+
+    cout<<"Ingrese el nombre de la la relacion: ";
+    cin>>nombre;
+    cout<<"Ingrese la cantidad de encabezados que desea: ";
+    cin>>cantidad_encabezados;
+
+    while(cantidad_encabezados<=0){
+    	cout<<"La cantidad de encabezados debe de ser mayor a cero "<<endl<<endl;
+    	cout<<"Ingrese la cantidad de encabezados que desea: ";
+    	cin>>cantidad_encabezados;
+    }//while que valida los numeros negativos
+
+
+    while(cantidad_encabezados>0){
+    	cout<<"Ingrese el encabezado: ";
+    	cin>>encabezado;
+    	encabezados.push_back(encabezado);
+    	cantidad_encabezados--;
+    }//agrega los encabezados
+
+    relacion=new Relacion(nombre);
+    relacion->setEncabezados(encabezados);
+    relacion->Relacion_Sencilla();
+}//fin del metodo para crear las relaciones
+
 int main(){
 
+	int usuario=1;
+
+	while(usuario==1){
+
+		switch(menu()){
+
+			case 1:{
+				Crear_Relacion();
+			break;}
+
+			case 2:{
+				cout<<"Realciones sin tuplas"<<endl<<endl;
+				leer_Sencilla();
+				//relacion->getNombre();	
+			break;}
+
+			case 3:
+			break;
+
+			case 4:
+				delete tupla;
+				delete relacion;
+				exit(1);
+			break;
+
+			default:
+				cout<<"Opcion no valida"<<endl<<endl;
+			break;	
+		}//fin del swtich del men
+
+		cout<<"Volver al menu [1.-Si/2.-No]: ";
+		cin>>usuario;
+		cout<<endl<<endl;
+	}//fin del while repetitivo
+	delete tupla;
+	delete relacion;
 }//fin del main 

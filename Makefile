@@ -2,6 +2,6 @@ all:
 	g++ Tupla.cpp \
 	Relacion.cpp \
 	Main.cpp \
-	-o Programa
+	-o Ejecutable
 cleanup:
-	rm Programa
+	rm Ejecutable
