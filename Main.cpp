@@ -4,12 +4,13 @@
 #include <bits/stdc++.h>
 #include "Relacion.cpp"
 #include "Tupla.cpp"
-
+#include <stdlib.h>
+#include<time.h>
 using namespace std;
 
 //Variables de control
 Relacion* relacion;
-Tupla* tupla;
+Tupla* tupla=new Tupla();
 
 //Vector para contorlar las relaciones
 vector<Relacion*>relaciones;
@@ -65,7 +66,7 @@ void leer_Sencilla(){
 }//fin del metodo lectura de realciones sencillas
 
 int menu(){
-		
+	srand(time(NULL));
 	int opcion;
 
 	cout<<"Menu\n\n";
@@ -129,28 +130,35 @@ int main(){
 			break;}
 
 			case 3:{
+				
 				int pos;
+				int id=1000+rand()%(10000-1);;
 				cout<<"Realciones"<<endl<<endl;
 				leer_Sencilla();
 
 				cout<<"Ingrese la poscion en la que inserta la tupla: ";
-				cint>>pos;
-
+				cin>>pos;	
 				while(pos<0|| pos>relaciones.size()){
+					cout<<"Posicion no valida"<<endl<<endl;
+					cout<<"Ingrese la poscion en la que inserta la tupla: ";
+					cin>>pos;
+				}//fin del while de las posiciones
+				tupla=new Tupla(id);
 
-				}//fin del whiel de las posiciones
-
+				relacion->setTupla(tupla);
+				//relacion->Relacion_tupla(relaciones[pos]->getNombre());
 			break;}
 
 			case 4:
 				delete tupla;
+				//delete relaciones;
 				delete relacion;
 				exit(1);
 			break;
 
-			default:
+			default:{
 				cout<<"Opcion no valida"<<endl<<endl;
-			break;	
+			break;}	
 		}//fin del swtich del men
 
 		cout<<"Volver al menu [1.-Si/2.-No]: ";
@@ -159,4 +167,5 @@ int main(){
 	}//fin del while repetitivo
 	delete tupla;
 	delete relacion;
+	//delete relaciones;
 }//fin del main 
