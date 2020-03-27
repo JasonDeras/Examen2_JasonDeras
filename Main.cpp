@@ -11,11 +11,13 @@ using namespace std;
 Relacion* relacion;
 Tupla* tupla;
 
+//Vector para contorlar las relaciones
+vector<Relacion*>relaciones;
+
 string token(string cadena, string divisor,int pos){
                
-      if(cadena.size()>0){
-                 
-        char oracion[cadena.size()]; 
+    if(cadena.size()>0){
+    	char oracion[cadena.size()]; 
                  
         for (int i=0;i<=cadena.size();i++){
           oracion[i]=cadena[i];
@@ -32,33 +34,33 @@ string token(string cadena, string divisor,int pos){
           num++;
         }//fin del while
         return "";
-      }else{
-        return "";
-      }
+    }else{
+    	return "";
     }
-    
+}//fin del metodo del token 
+
 void leer_Sencilla(){
-      fstream Leer;
-      string linea;              
-      Leer.open("./relaciones.txt"); 
-      int cont=0;
-      if (Leer.is_open()){                 
-        
-        while(! Leer.eof()){
-          getline(Leer,linea);             
-          if(linea.size()>0){//Atoi es de string a id o de cualquier otro numero  
-            cout<<"Nombre: "<<token(linea,";",1);
-            cout<<"\nEncabezados: "<<token(linea,";",2);
-            cout<<endl<<endl;
-          } 
+
+    fstream Leer;
+    string linea;              
+    Leer.open("./relaciones.txt"); 
+    int cont=0;
+    
+    if (Leer.is_open()){
+    	while(! Leer.eof()){
+    		getline(Leer,linea);             
+        	if(linea.size()>0){//Atoi es de string a id o de cualquier otro numero  
+         		cout<<"Nombre: "<<token(linea,";",1);
+         		relaciones.push_back(new Relacion(token(linea,";",1)));
+            	cout<<"\nEncabezados: "<<token(linea,";",2);
+            	cout<<endl<<endl;
+        	} 
         }
 
-      }     
-      Leer.close();
-    }
+    }     
+     Leer.close();
 
-
-
+}//fin del metodo lectura de realciones sencillas
 
 int menu(){
 		
@@ -120,13 +122,18 @@ int main(){
 			break;}
 
 			case 2:{
-				cout<<"Realciones sin tuplas"<<endl<<endl;
+				cout<<"Realciones"<<endl<<endl;
 				leer_Sencilla();
 				//relacion->getNombre();	
 			break;}
 
-			case 3:
-			break;
+			case 3:{
+				leer_Sencilla();
+				cout<<"Relacionse creadas"<<endl;
+				for (int i = 0; i < relaciones.size(); ++i){
+					relaciones.at(i)->getNombre();
+				}
+			break;}
 
 			case 4:
 				delete tupla;

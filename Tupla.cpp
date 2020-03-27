@@ -11,7 +11,7 @@ class Tupla{
       
       private:
         int id;
-		vector<string>atributos;                        
+		    vector<string>atributos;                        
       public:
 
             Tupla(){

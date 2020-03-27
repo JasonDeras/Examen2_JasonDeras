@@ -14,8 +14,6 @@ class Relacion{
     vector<string>encabezados;                        
     string nombre;
     vector<Tupla*>tuplas;
-    vector<Relacion*>relaciones;
-
   public:
 
     Relacion(){
@@ -66,11 +64,23 @@ class Relacion{
       for (int i = 0; i < encabezados.size(); ++i){
           Escribir<<encabezados[i]<<",";
       }
-      Escribir<<";"<<endl;
+
       Escribir.close();
 
     }//fin del metodo para guardar relaciones con sus encabezados
-    
+
+    void Relacion_tupla(string ruta){
+
+      ofstream Escribir;
+      Escribir.open("./"+ruta+"txt",std::ios::app);
+      for (int i = 0; i <tuplas.size(); ++i){
+          Escribir<<tuplas.at(i)->getId()<<",";
+          //Escribir<<tuplas.at(i)->getAtributos()<<",";
+      }
+
+      Escribir<<";"<<endl;
+      Escribir.close();
+    }//fin del metodo para escribir el 
     ~Relacion(){
 
     }//destructor             
